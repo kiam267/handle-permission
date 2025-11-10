@@ -9,21 +9,37 @@ import {
 } from '@/components/ui/card';
 import { Button } from './ui/button';
 import { hasPermission, Role } from '@/lib/auth';
-
-export function CardDemo() {
+import { auth } from '@clerk/nextjs/server';
+import { SignInButton, SignOutButton } from '@clerk/nextjs';
+export async function CardDemo() {
   const user: { id: string; role: Role } = {
     id: '2',
     role: 'user',
   };
   const authorId = '2';
+  const { sessionClaims, userId } = await auth();
 
+  if (userId === null || sessionClaims === null) {
+    return (
+      <Button>
+        <SignInButton />
+      </Button>
+    );
+  }
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
+        <h3>My Role: {sessionClaims?.metadata.role}</h3>
         <CardTitle>Handel Permission</CardTitle>
       </CardHeader>
       <CardContent>
-        {hasPermission(user, 'delete:comments') ||
+        {hasPermission(
+          {
+            id: userId as string,
+            role: sessionClaims?.metadata.role as Role,
+          },
+          'delete:comments'
+        ) ||
           (hasPermission(user, 'delete:ownComments') &&
             user.id === authorId && (
               <Button
@@ -34,6 +50,11 @@ export function CardDemo() {
               </Button>
             ))}
       </CardContent>
+      <CardFooter>
+        <Button>
+          <SignOutButton redirectUrl="/" />
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
