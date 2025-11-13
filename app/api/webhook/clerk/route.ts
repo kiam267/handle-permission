@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     try {
       await clerk.users.updateUser(id, {
-        publicMetadata: { role: 'user' },
+        publicMetadata: { roles: ['user'] },
       });
     } catch (err) {
       console.error('Error setting role:', err);
