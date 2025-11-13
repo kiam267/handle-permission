@@ -9,11 +9,41 @@ type PermissionCheck<Key extends keyof Permissions> =
 
 type RolesWithPermission = {
   [R in Role]: Partial<{
-    [key in keyof Permissions]: Partial<{
-      [Action in Permissions[key]['action']]: PermissionCheck<key>;
+    [Key in keyof Permissions]: Partial<{
+      [Action in Permissions[Key]['action']]: PermissionCheck<Key>;
     }>;
   }>;
 };
+
+
+
+/* 
+RESULT: 
+type Role = "admin" | "moderator" | "user"
+
+{
+admin?:{
+  commetns?:{
+    view: boolean || (user)
+    create: 
+  },
+  todos?:{
+  }
+ }
+ moderator?: {
+ 
+ },
+ user?:{
+ }
+}
+ 
+
+
+
+
+
+
+*/
 
 type Permissions = {
   comments: {
@@ -26,6 +56,7 @@ type Permissions = {
   };
 };
 
+// TODO: batabase schema
 const ROLES = {
   admin: {
     comments: {
@@ -78,7 +109,7 @@ const ROLES = {
 } as const satisfies RolesWithPermission;
 
 export function hasPermission<
-  Resource extends keyof Permissions
+  Resource  extends keyof Permissions
 >(
   user: User,
   resource: Resource,
