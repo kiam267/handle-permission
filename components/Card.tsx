@@ -24,9 +24,9 @@ export async function CardDemo() {
     );
   }
   const user: User = {
-    roles: sessionClaims.roles,
+    roles: ['admin', 'user'],
     id: userId,
-    blockedBy: [],
+    blockedBy: ['1'],
   };
   const todos = [
     {
@@ -158,7 +158,7 @@ function GeneralButtonCheck({
   return (
     <Button
       variant={
-        hasPermission(user, resource, action)
+        hasPermission(user, resource, action,  )
           ? 'default'
           : 'destructive'
       }
