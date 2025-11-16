@@ -16,6 +16,10 @@ export function CardDemo() {
     role: 'user',
   };
   const authorId = '2';
+  console.log(
+    hasPermission(user, 'create:comments'),
+    'Permission Check'
+  );
 
   return (
     <Card className="w-full max-w-sm">

@@ -1,5 +1,7 @@
 export type Role = keyof typeof ROLES;
+// Fist get ROLE name 
 type Permission = (typeof ROLES)[Role][number];
+
 
 const ROLES = {
   admin: [
