@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Handel Permission',
+  title: 'Handel Permission Application',
   description: 'Handel Permission Application',
 };
 
