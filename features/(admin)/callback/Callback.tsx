@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
-function Fallback({
+function Callback({
   children,
 }: {
   children: React.ReactNode;
@@ -19,4 +19,4 @@ function Fallback({
   return children;
 }
 
-export default Fallback;
+export default Callback;
