@@ -12,10 +12,20 @@ import {
 import { Button } from '../ui/button';
 import { Trash2 } from 'lucide-react';
 
+type User = {
+  id: string;
+  name: string;
+  avatar: string;
+  roles: string[];
+  email: string;
+};
+
 function BlogAlertDialog({
   triggerButton,
+  rows,
 }: {
   triggerButton: React.ReactNode;
+  rows: User[];
 }) {
   return (
     <AlertDialog>
@@ -39,8 +49,12 @@ function BlogAlertDialog({
               variant="destructive"
               className="cursor-pointer bg-red-700 hover:bg-red-700/70"
               onClick={async () => {
-                fetch('/api/v1/user/delete', {
+                fetch('/api/v1/user/deletes', {
                   method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ rows }),
                 })
                   .then(data => {
                     console.log(data);

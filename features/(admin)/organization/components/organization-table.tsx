@@ -238,10 +238,10 @@ export function OrganizationTable() {
   const [rowSelection, setRowSelection] = React.useState(
     {}
   );
-  const [seletedRow, setSeletedRow] = React.useState<
+  const [seletedRows, setSeletedRows] = React.useState<
     User[]
   >([]);
-  console.log(seletedRow);
+  
 
   const table = useReactTable({
     data,
@@ -267,7 +267,7 @@ export function OrganizationTable() {
 
   const fatch = async (rows: Row<User>[]) => {
     const newRows = rows.map(row => row.original);
-    setSeletedRow([...newRows]);
+    setSeletedRows([...newRows]);
   };
 
   return (
@@ -288,7 +288,7 @@ export function OrganizationTable() {
           className="max-w-sm"
         />
 
-        {seletedRow.length > 0 && (
+        {seletedRows.length > 0 && (
           <BlogAlertDialog
             triggerButton={
               <Button
@@ -299,6 +299,7 @@ export function OrganizationTable() {
                 <span>Delete</span>
               </Button>
             }
+            rows={seletedRows}
           />
         )}
         <DropdownMenu>
