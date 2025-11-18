@@ -24,3 +24,20 @@ export const APP_BAR_ITEMS = [
     icon: FileText,
   },
 ];
+export const COLOR_OF_ROLES = [
+  {
+    id: 1,
+    color: 'bg-yellow-500',
+    role: 'user',
+  },
+  {
+    id: 2,
+    color: 'bg-green-500',
+    role: 'admin',
+  },
+  {
+    id: 3,
+    color: 'bg-blue-500',
+    role: 'moderator',
+  },
+];
